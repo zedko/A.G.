@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'captcha',
 
     'authapp',
+    'adminapp',
+
 ]
 
 MIDDLEWARE = [
