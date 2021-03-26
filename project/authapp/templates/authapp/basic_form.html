@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{{ request.context }}
+{% if err %}
+<h1> {{err}} </h1>
+{% endif %}
+
+<form class="form_horizontal ml-5" method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="form-control btn btn-primary mb-2 col-2" value="{{submit_button}}">
+
+</form>
+
+{% if reset_password_link %}
+<a href="{%url 'authapp:password_reset' %}">Reset password</a>
+{% endif %}
+
+</body>
+</html>

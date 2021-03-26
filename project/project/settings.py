@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'captcha',
+
+    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -96,12 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
@@ -130,3 +126,26 @@ STATIC_URL = '/static/'
 # reCapcha
 RECAPTCHA_PUBLIC_KEY = hidden['RECAPTCHA_PUBLIC_KEY']
 RECAPTCHA_PRIVATE_KEY = hidden['RECAPTCHA_PRIVATE_KEY']
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'consoleformatter': {
+            'format': '---> {levelname} {module} ---> {message}',
+            'style': '{',
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'consoleformatter',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

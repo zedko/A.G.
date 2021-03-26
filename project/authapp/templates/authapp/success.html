@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+success
+<a href="{% url 'authapp:registration' %}">REGISTER</a>
+<a href="{% url 'authapp:login' %}">LOGIN</a>
+<p>
+{% if previous_page %}
+
+    <a href="{{previous_page}}">go back</a>
+
+{% endif %}
+</p>
+</body>
+</html>
