@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'authapp:logout' %}">Logout</a>
+{{ user }}
+{{ user.profile.email_verified }}
+
+
+{% if user.is_staff %}
+    {% for u in users %}
+        <a href="{% url 'adminapp:user_update' u.pk %}">
+            <p>{{ u }}</p>
+        </a>
+    {% endfor %}
+{% endif %}
+
+
+{% if not user.profile.email_verified %}
+<p>необходимо подтвердить email</p>
+{% endif %}
+</body>
+</html>

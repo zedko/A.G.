@@ -15,5 +15,8 @@ class Profile(models.Model):
     email_verified = models.BooleanField(default=False, blank=False)
     phone = models.CharField(max_length=16, blank=True, validators=[phone_validator], verbose_name="Phone number")
 
+    def __str__(self):
+        return f'Profile obj for User {self.user}'
+
 
 

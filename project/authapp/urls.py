@@ -7,6 +7,7 @@ app_name = 'authapp'
 urlpatterns = [
     path('registration/', views.UserCreateView.as_view(), name='registration'),
     path('login/', views.LoginFormView.as_view(), name='login'),
+    path('logout/', views.logout_view, name='logout'),
     path('success/', views.success, name='success'),
 
     # reset password
