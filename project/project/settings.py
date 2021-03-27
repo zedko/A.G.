@@ -14,6 +14,8 @@ import os
 import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.urls import reverse_lazy
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 with open(os.path.join(BASE_DIR, 'almost_env_var.json'), 'r') as f:
@@ -128,6 +130,9 @@ STATIC_URL = '/static/'
 # reCapcha
 RECAPTCHA_PUBLIC_KEY = hidden['RECAPTCHA_PUBLIC_KEY']
 RECAPTCHA_PRIVATE_KEY = hidden['RECAPTCHA_PRIVATE_KEY']
+
+LOGIN_URL = reverse_lazy('authapp:login')
+LOGIN_REDIRECT_URL = reverse_lazy('adminapp:admin_index')
 
 LOGGING = {
     'version': 1,
