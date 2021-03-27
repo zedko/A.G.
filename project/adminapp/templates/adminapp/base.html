@@ -9,6 +9,9 @@
 {{ user }}
 {{ user.profile.email_verified }}
 
+<h2>Token: {{ token.key }}</h2>
+<p><a href="{% url 'api:generate' %}">generate</a></p>
+
 
 {% if user.is_staff %}
     {% for u in users %}
@@ -16,6 +19,10 @@
             <p>{{ u }}</p>
         </a>
     {% endfor %}
+    {% for log in api_requests_logs %}
+        <p>{{ log }}</p>
+    {% endfor %}
+
 {% endif %}
 
 

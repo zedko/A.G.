@@ -4,10 +4,12 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
+from rest_framework.authtoken.models import Token
 
 
 from authapp.models import Profile
 from .forms import UserUpdateCustomForm, ProfileUpdateCustomForm
+from api.models import LogApiRequestsModel
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +18,9 @@ logger = logging.getLogger(__name__)
 def admin_index_view(request):
     context = {}
     context['users'] = User.objects.all()
+    context['token'] = Token.objects.filter(user=request.user).first()
+    context['api_requests_logs'] = LogApiRequestsModel.objects.all()
+
     logger.debug(f'{request.user} is logged in {context}')
 
     return render(request, 'adminapp/base.html', context)
@@ -49,3 +54,5 @@ def user_update_view(request, pk: int):
     }
 
     return render(request, 'adminapp/update_profile.html', context)
+
+

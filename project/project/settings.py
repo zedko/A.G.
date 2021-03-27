@@ -51,11 +51,16 @@ INSTALLED_APPS = [
 
     'authapp',
     'adminapp',
+    'api',
 
 ]
 
 REST_FRAMEWORK = {
+
     'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
@@ -69,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'api.middleware.LogApiRequestsMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
