@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 <a href="{% url 'authapp:logout' %}">Logout</a>
@@ -29,5 +30,6 @@
 {% if not user.profile.email_verified %}
 <p>необходимо подтвердить email</p>
 {% endif %}
+
 </body>
 </html>

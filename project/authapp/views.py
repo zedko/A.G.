@@ -3,7 +3,7 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import FormView
 import logging
 
@@ -15,7 +15,11 @@ logger = logging.getLogger(__name__)
 
 def success(request):
     context = dict()
-    context['previous_page'] = request.META.get('HTTP_REFERER')
+
+    # For displaying instructions about password reset link
+    if reverse('authapp:password_reset') in request.META.get('HTTP_REFERER'):
+        context['password_reset_info'] = True
+
     return render(request, template_name='authapp/success.html', context=context)
 
 
@@ -60,8 +64,8 @@ class LoginFormView(LoginView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['submit_button'] = 'Log in!!!'
-        context['reset_password_link'] = True
+        context['submit_button'] = 'Log in'
+        context['login_page'] = True
         return context
 
 

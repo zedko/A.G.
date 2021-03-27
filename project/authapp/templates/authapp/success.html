@@ -1,19 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-success
-<a href="{% url 'authapp:registration' %}">REGISTER</a>
-<a href="{% url 'authapp:login' %}">LOGIN</a>
-<p>
-{% if previous_page %}
+{% extends 'base.html' %}
+{% block title %}
+    LOGIN FORM
+{% endblock %}
 
-    <a href="{{previous_page}}">go back</a>
+{% block body %}
+<div class="alert alert-success" role="alert">
+  Your action ended up being successful!
+{% if password_reset_info %}
+
+    <br>
+    Check console for password reset link
 
 {% endif %}
-</p>
-</body>
-</html>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-2">
+        <a href="{% url 'authapp:registration' %}">Registration page</a>
+    </div>
+    <div class="col-md-2">
+        <a href="{% url 'authapp:login' %}">Login page</a>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
