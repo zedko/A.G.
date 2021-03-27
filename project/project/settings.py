@@ -46,11 +46,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'captcha',
+    'rest_framework',
+    'rest_framework.authtoken',
 
     'authapp',
     'adminapp',
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
