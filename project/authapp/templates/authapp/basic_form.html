@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    LOGIN FORM
+    Authapp view
 {% endblock %}
 
 {% block body %}
@@ -9,29 +9,16 @@
 {% endif %}
  <div class="row justify-content-center">
     <div class="col-sm col-md-auto">
-
-
-
-
-
     <form class="form_horizontal" method="post" enctype="multipart/form-data">
-
         {% csrf_token %}
-<!--        {{ form.as_p }}-->
-
         {% for field in form %}
         <div class="row">
             <div class="col-md-4">
                 {{ field.label_tag }}
-<!--                {% if field.help_text %}-->
-<!--                    <sup>{{ field.help_text }}</sup>-->
-<!--                {% endif %}-->
-
             </div>
             <div class="col-md-5 pull-left">
                  {{ field }}
             </div>
-
         </div>
          {% if field.errors %}
         <div class="row">
@@ -40,7 +27,6 @@
             </div>
         </div>
         {% endif %}
-
         {% endfor %}
         <div class="row mt-2 justify-content-center">
             <div class="col-md-10">
@@ -59,9 +45,6 @@
                 <a href="{%url 'authapp:password_reset' %}">Reset password</a>
             </div>
         </div>
-
-
-
 
 
     {% endif %}

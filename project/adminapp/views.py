@@ -50,7 +50,8 @@ def user_update_view(request, pk: int):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'owner': user,
     }
 
     return render(request, 'adminapp/update_profile.html', context)

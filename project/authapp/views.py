@@ -1,10 +1,9 @@
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import FormView
+from django.views.generic import FormView, DeleteView
 import logging
 
 from .models import Profile
@@ -52,6 +51,12 @@ class UserCreateView(FormView):
         context = super().get_context_data(**kwargs)
         context['submit_button'] = 'Register'
         return context
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    template_name = 'authapp/delete_confirmation.html'
+    success_url = reverse_lazy('authapp:login')
 
 
 class LoginFormView(LoginView):

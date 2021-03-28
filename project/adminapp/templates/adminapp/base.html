@@ -1,35 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends 'base.html' %}
+{% block title %}
+    Adminapp view
+{% endblock %}
+{% block body %}
 
-</head>
-<body>
-<a href="{% url 'authapp:logout' %}">Logout</a>
-{{ user }}
-{{ user.profile.email_verified }}
+{% if not user.profile.email_verified %}
+<div class="row">
+    <div class="fixed-top alert alert-warning text-center" role="alert">необходимо подтвердить email</div>
+</div>
+{% endif %}
+<div class="row mt-2">
+    <div class="col-md-11 text-right"  style="top: 0;">
+        {{ user }} <a class="ml-2" href="{% url 'authapp:logout' %}"> Logout</a>
+    </div>
+</div>
+{% block admin_body %}
+<div class="row mt-2 justify-content-center">
+    <div class="col-md-7 text-center"  style="top: 0;">
+        <h3>Token</h3>
+        <input class="form-control" value="{{ token.key }}" disabled>
+        <a href="{% url 'api:generate' %}"><button class="btn btn-primary mt-2">Generate</button></a>
+    </div>
+</div>
 
-<h2>Token: {{ token.key }}</h2>
-<p><a href="{% url 'api:generate' %}">generate</a></p>
+
 
 
 {% if user.is_staff %}
-    {% for u in users %}
-        <a href="{% url 'adminapp:user_update' u.pk %}">
-            <p>{{ u }}</p>
-        </a>
-    {% endfor %}
-    {% for log in api_requests_logs %}
-        <p>{{ log }}</p>
-    {% endfor %}
+    {% include 'adminapp/includes/user_list.html' %}
+
+    {% include 'adminapp/includes/api_log.html' %}
 
 {% endif %}
 
-
-{% if not user.profile.email_verified %}
-<p>необходимо подтвердить email</p>
-{% endif %}
-
-</body>
-</html>
+{% endblock %}
+{% endblock %}

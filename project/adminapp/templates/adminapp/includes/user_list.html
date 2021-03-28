@@ -1,0 +1,10 @@
+<h3 class="mt-3">Registered Users</h3>
+{% for u in users %}
+<div class="row mt-1">
+    <div class="col-md-5">
+        <a href="{% url 'adminapp:user_update' u.pk %}">
+            {{u.id}} - {{ u }} - {{ u.email }}
+        </a>
+    </div>
+</div>
+{% endfor %}
