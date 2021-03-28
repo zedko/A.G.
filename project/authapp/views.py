@@ -1,4 +1,5 @@
 from django.contrib.auth import logout, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView
 from django.shortcuts import render, redirect
@@ -13,9 +14,12 @@ logger = logging.getLogger(__name__)
 
 
 def success(request):
+    """
+    Dummy page for successful actions
+    """
     context = dict()
 
-    # For displaying instructions about password reset link
+    # Displaying instructions about password reset link
     if reverse('authapp:password_reset') in request.META.get('HTTP_REFERER'):
         context['password_reset_info'] = True
 
@@ -54,6 +58,9 @@ class UserCreateView(FormView):
 
 
 class UserDeleteView(DeleteView):
+    """
+    Delete action for User
+    """
     model = User
     template_name = 'authapp/delete_confirmation.html'
     success_url = reverse_lazy('authapp:login')
@@ -83,7 +90,6 @@ class PasswordCustomResetView(PasswordResetView):
     email_template_name = 'authapp/emails/password_reset_email.html'
     success_url = reverse_lazy('authapp:success')
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['submit_button'] = 'Reset password'
@@ -91,6 +97,9 @@ class PasswordCustomResetView(PasswordResetView):
 
 
 class PasswordResetConfirmCustomView(PasswordResetConfirmView):
+    """
+    Password reset confirmation step
+    """
     template_name = 'authapp/basic_form.html'
     success_url = reverse_lazy('authapp:success')
 
@@ -100,11 +109,8 @@ class PasswordResetConfirmCustomView(PasswordResetConfirmView):
         return context
 
 
+@login_required
 def logout_view(request):
+    """ Logouts User """
     logout(request)
     return redirect('authapp:login')
-
-
-
-
-

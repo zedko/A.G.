@@ -16,6 +16,9 @@ logger = logging.getLogger(__name__)
 
 @login_required
 def admin_index_view(request):
+    """
+    Admin panel index page
+    """
     context = {}
     context['users'] = User.objects.all()
     context['token'] = Token.objects.filter(user=request.user).first()
@@ -28,6 +31,9 @@ def admin_index_view(request):
 
 @user_passes_test(lambda u: u.is_staff, login_url='adminapp:admin_index', redirect_field_name=None)
 def user_update_view(request, pk: int):
+    """
+    Update / delete view for User+Profile models
+    """
     user = User.objects.get(pk=pk)
 
     # create profile if not exists for some reason

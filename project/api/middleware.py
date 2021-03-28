@@ -6,6 +6,9 @@ logger = logging.getLogger(__name__)
 
 
 class LogApiRequestsMiddleware:
+    """
+    Writes API request history to DB
+    """
     def __init__(self, get_response):
         self.get_response = get_response
 

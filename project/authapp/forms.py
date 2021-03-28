@@ -11,14 +11,15 @@ from .models import Profile
 def no_user_by_email_validator(email):
     """
     Checks if there is no such user
-    :param email: email
-    :return:
     """
     if not User.objects.filter(email=email).exists():
         raise ValidationError(f"No user with email {email}")
 
 
 class CustomizedUserCreationForm(UserCreationForm):
+    """
+    for User with Profile.phone creation
+    """
     phone = forms.CharField(max_length=16, validators=[Profile.phone_validator])
     captcha = ReCaptchaField(widget=ReCaptchaV3, label='')
 
@@ -28,6 +29,9 @@ class CustomizedUserCreationForm(UserCreationForm):
 
 
 class PasswordResetCustomForm(PasswordResetForm):
+    """
+    Standard pass reset form but with validation
+    """
     email = forms.EmailField(
         label="Email",
         max_length=254,
