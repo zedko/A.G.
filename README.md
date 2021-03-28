@@ -6,10 +6,10 @@
 * make virtualenv with python 3.9.0 and activate it. Then go to project folder  
 * `pip install -r requirements.txt`  
 * `cd project`
-* `python project/manage.py migrate`  
-* `python project/manage.py createsuperuser --username django --email test@test.ru`  
+* `python manage.py migrate`  
+* `python manage.py createsuperuser --username django --email test@test.ru`  
 * input your password two times  
-* `python project/manage.py runserver`  
+* `python manage.py runserver`  
 
 
 ## По архитектуре:
